@@ -6,14 +6,13 @@ import LoginPage from './pages/LoginPage';
 import Grid from './components/Grid';
 import Modal from './components/Modal';
 
-
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/create" element={<CreateStoryPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/create' element={<CreateStoryPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
       <Grid />
     </Router>

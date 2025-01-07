@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PostCard from './PostCard';
+import Modal from './Modal';
 
 const Grid = () => {
   const [posts, setPosts] = useState([
@@ -9,44 +10,43 @@ const Grid = () => {
   ]);
 
   const handleAddPost = (type, content) => {
-    setPosts((prevPosts) => [...prevPosts, { type, content }]);
+    setPosts(prevPosts => [...prevPosts, { type, content }]);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const openModal = post => {
+    setSelectedPost(post);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedPost(null);
+    setIsOpen(false);
   };
 
   return (
-    <div className="p-4 space-y-8">
-      {/* Add Buttons to Add Different Types of Posts */}
-      <div className="flex space-x-4">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => handleAddPost('image', 'https://via.placeholder.com/300')}
-        >
-          Add Image Post
-        </button>
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          onClick={() =>
-            handleAddPost(
-              'video',
-              'https://sample-videos.com/video123/mp4/480/asdasdas.mp4'
-            )
-          }
-        >
-          Add Video Post
-        </button>
-        <button
-          className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-          onClick={() => handleAddPost('text', 'This is a new text-only post!')}
-        >
-          Add Text Post
-        </button>
-      </div>
-
+    <div className='p-4 space-y-8'>
       {/* Posts Grid */}
-      <div className="grid grid-cols-3 gap-2 md:gap-4">
+      <div className='grid grid-cols-3 gap-2 md:gap-4'>
         {posts.map((post, index) => (
-          <PostCard key={index} type={post.type} content={post.content} />
+          <div key={index} className='cursor-pointer' onClick={() => openModal(post)}>
+            <PostCard key={index} type={post.type} content={post.content} />
+          </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {selectedPost && (
+        <Modal
+          image={selectedPost.type === 'image' ? selectedPost.content : null}
+          video={selectedPost.type === 'video' ? selectedPost.content : null}
+          text={selectedPost.text}
+          isOpen={isOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };
