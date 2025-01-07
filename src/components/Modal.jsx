@@ -9,29 +9,25 @@ const Modal = ({ image, video, text, isOpen, onClose }) => {
     >
       <div className={`border border-black bg-white static flex justify-center p-10 rounded-lg`}>
         <div
-          className={`border border-red-600 bg-white rounded-lg overflow-hidden shadow-lg max-w-sm transition-transform transform duration-300 ease-in-out ${
+          className={`bg-white rounded-lg overflow-hidden shadow-lg max-w-sm w-64 h-64 relative transition-transform transform duration-300 ease-in-out ${
             isOpen ? 'scale-100' : 'scale-95'
           }`}
         >
           {/* Close Button */}
-          <button onClick={onClose} className='relative cursor-pointer text-gray-100-500 z-1'>
-            CLOSE
+          <button onClick={onClose} className='absolute top-2 right-2 text-gray-500 hover:text-black z-10'>
+            ✕
           </button>
-          {/* Image or Video Content */}
+
+          {/* Media Content */}
           <div className='w-full h-full flex justify-center items-center'>
             {image && <img src={image} alt='Post' className='object-contain w-full h-full' />}
             {video && (
-              <video controls className='object-contain w-64 h-64'>
+              <video controls className='object-contain w-full h-full'>
                 <source src={video} type='video/mp4' />
                 Your browser does not support the video tag.
               </video>
             )}
-            {!image && !video && text && (
-              <div className='flex justify-center items-center object-contain p-4 text-center text-gray-700'>
-                {' '}
-                <p>{text}</p>
-              </div>
-            )}
+            {!image && !video && text && <p className='text-center p-4'>{text}</p>}
           </div>
         </div>
       </div>
