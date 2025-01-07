@@ -42,8 +42,8 @@ const Grid = () => {
         <Modal
           image={selectedPost.type === 'image' ? selectedPost.content : null}
           video={selectedPost.type === 'video' ? selectedPost.content : null}
+          text={selectedPost.type === 'text' ? selectedPost.content : null}
           caption={selectedPost.caption}
-          text={selectedPost.text}
           isOpen={isOpen}
           onClose={closeModal}
         />
