@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import CreateStoryPage from './pages/CreateStoryPage';
 import LoginPage from './pages/LoginPage';
 import Grid from './components/Grid';
-import Modal from './components/Modal';
 
 function App() {
   return (

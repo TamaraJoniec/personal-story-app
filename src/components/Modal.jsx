@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Modal = ({ image, video, text, isOpen, onClose }) => {
+const Modal = ({ image, video, text, caption, isOpen, onClose }) => {
   return (
     <div
-      className={`border border-red-600 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 transition-all duration-300 ease-in-out ${
+      className={`border fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 transition-all duration-300 ease-in-out ${
         isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
     >
       <div className={`border border-black bg-white static flex justify-center p-10 rounded-lg`}>
         <div
-          className={`bg-white rounded-lg overflow-hidden shadow-lg max-w-sm w-64 h-64 relative transition-transform transform duration-300 ease-in-out ${
+          className={`bg-white rounded-lg overflow-hidden shadow-lg max-w-sm w-64 min-h-64 relative transition-transform transform duration-300 ease-in-out ${
             isOpen ? 'scale-100' : 'scale-95'
           }`}
         >
@@ -19,7 +19,7 @@ const Modal = ({ image, video, text, isOpen, onClose }) => {
           </button>
 
           {/* Media Content */}
-          <div className='w-full h-full flex justify-center items-center'>
+          <div className='w-full h-full flex flex-col justify-center items-center'>
             {image && <img src={image} alt='Post' className='object-contain w-full h-full' />}
             {video && (
               <video controls className='object-contain w-full h-full'>
@@ -28,6 +28,7 @@ const Modal = ({ image, video, text, isOpen, onClose }) => {
               </video>
             )}
             {!image && !video && text && <p className='text-center p-4'>{text}</p>}
+            {caption && <div className='p-4 border-t border-gray-200 text-gray-600 text-sm'>{caption}</div>}
           </div>
         </div>
       </div>
