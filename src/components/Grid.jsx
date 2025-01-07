@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PostCard from './PostCard';
 import Modal from './Modal';
+import MediaUpload from './MediaUpload';
 
 const Grid = () => {
   const [posts, setPosts] = useState([
@@ -9,10 +10,7 @@ const Grid = () => {
     { type: 'text', content: 'This is a text-only post!' },
   ]);
 
-  const handleAddPost = (type, content, caption) => {
-    setPosts(prevPosts => [...prevPosts, { type, content, caption }]);
-  };
-
+  const [isPostModalOpen, setIsPostModalOpen] = useState(false); // For media upload modal
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
 
@@ -26,8 +24,18 @@ const Grid = () => {
     setIsOpen(false);
   };
 
+  const handleAddPost = newPost => {
+    setPosts(prevPosts => [...prevPosts, newPost]);
+    setIsPostModalOpen(false); // Close upload modal after adding a post
+  };
+
   return (
     <div className='p-4 space-y-8'>
+      {/* Button to Open Media Upload Modal */}
+      <button onClick={() => setIsPostModalOpen(true)} className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600'>
+        Create Post
+      </button>
+
       {/* Posts Grid */}
       <div className='grid grid-cols-3 gap-2 md:gap-4'>
         {posts.map((post, index) => (
@@ -47,6 +55,13 @@ const Grid = () => {
           isOpen={isOpen}
           onClose={closeModal}
         />
+      )}
+
+      {/* Media Upload Modal */}
+      {isPostModalOpen && (
+        <Modal isOpen={isPostModalOpen} onClose={() => setIsPostModalOpen(false)}>
+          <MediaUpload onAddPost={handleAddPost} />
+        </Modal>
       )}
     </div>
   );
