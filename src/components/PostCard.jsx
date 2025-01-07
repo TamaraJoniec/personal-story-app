@@ -2,7 +2,7 @@ import React from 'react';
 
 const PostCard = ({ type, content }) => {
   return (
-    <div className='relative bg-gray-200 rounded-lg overflow-hidden shadow-lg w-64 h-64 cursor-pointer flex justify-center items-center'>
+    <div className='relative bg-gray-200 rounded-lg overflow-hidden shadow-lg w-full h-full aspect-square cursor-pointer flex justify-center items-center'>
       {/* Image Post */}
       {type === 'image' && <img src={content} alt='Post' className='object-contain w-full h-full' />}
 

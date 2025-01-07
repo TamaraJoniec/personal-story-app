@@ -37,7 +37,7 @@ const Grid = () => {
       </button>
 
       {/* Posts Grid */}
-      <div className='grid grid-cols-3 gap-2 md:gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
         {posts.map((post, index) => (
           <div key={index} className='cursor-pointer' onClick={() => openModal(post)}>
             <PostCard key={index} type={post.type} content={post.content} />
