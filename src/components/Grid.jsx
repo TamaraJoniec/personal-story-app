@@ -46,15 +46,21 @@ const Grid = () => {
       </div>
 
       {/* Modal */}
-      {selectedPost && (
+      {isOpen && selectedPost && (
         <Modal
-          image={selectedPost.type === 'image' ? selectedPost.content : null}
-          video={selectedPost.type === 'video' ? selectedPost.content : null}
-          text={selectedPost.type === 'text' ? selectedPost.content : null}
-          caption={selectedPost.caption}
+          // image={selectedPost.type === 'image' ? selectedPost.content : null}
+          // video={selectedPost.type === 'video' ? selectedPost.content : null}
+          // text={selectedPost.type === 'text' ? selectedPost.content : null}
+          // caption={selectedPost.caption}
           isOpen={isOpen}
           onClose={closeModal}
-        />
+        >
+          <div className='flex flex-col items-center'>
+            {selectedPost.type === 'image' && (
+              <img src={selectedPost.content} alt={selectedPost.caption} className='object-cover max-w-full max-h-[80vh] rounded-lg' />
+            )}
+          </div>
+        </Modal>
       )}
 
       {/* Media Upload Modal */}
