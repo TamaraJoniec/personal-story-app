@@ -47,18 +47,21 @@ const Grid = () => {
 
       {/* Modal */}
       {isOpen && selectedPost && (
-        <Modal
-          // image={selectedPost.type === 'image' ? selectedPost.content : null}
-          // video={selectedPost.type === 'video' ? selectedPost.content : null}
-          // text={selectedPost.type === 'text' ? selectedPost.content : null}
-          // caption={selectedPost.caption}
-          isOpen={isOpen}
-          onClose={closeModal}
-        >
+        <Modal isOpen={isOpen} onClose={closeModal} type={selectedPost.type} content={selectedPost.content} caption={selectedPost.caption}>
           <div className='flex flex-col items-center'>
             {selectedPost.type === 'image' && (
               <img src={selectedPost.content} alt={selectedPost.caption} className='object-cover max-w-full max-h-[80vh] rounded-lg' />
             )}
+          </div>
+          <div className='flex flex-col items-center'>
+            {selectedPost.type === 'video' && (
+              <video width='750' height='500' controls className='object-cover max-w-full max-h-[80vh] rounded-lg'>
+                <source src={selectedPost.content} alt={selectedPost.caption}></source>
+              </video>
+            )}
+          </div>
+          <div className='flex flex-col items-center'>
+            {selectedPost.type === 'text' && <p className='object-cover max-w-full max-h-[80vh] rounded-lg'>{selectedPost.content}</p>}
           </div>
         </Modal>
       )}
