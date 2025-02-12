@@ -18,7 +18,7 @@ const Modal = ({ image, video, text, type, caption, children, isOpen, onClose })
           onClick={e => e.stopPropagation()}
         >
           {/* Close Button */}
-          <button onClick={onClose} className='absolute top-2 right-2 text-gray-500 hover:text-black z-10'>
+          <button onClick={onClose} className='absolute top-2 right-2 text-gray-500 hover:text-black z-10 text-2xl'>
             &times;
           </button>
 
@@ -34,10 +34,10 @@ const Modal = ({ image, video, text, type, caption, children, isOpen, onClose })
                   Your browser does not support the video tag.
                 </video>
               )}
-              {!image && !video && text && <p className='text-center p-4'>{text}</p>}
-              {caption && <div className='p-4 border-t border-gray-200 text-gray-600 text-sm'>{caption}</div>}
             </div>
           )}
+
+          {caption && <div className='flex justify-center items-center p-4 border-t border-gray-200 text-gray-600 text-sm'>{caption}</div>}
         </div>
       </div>
     </div>
