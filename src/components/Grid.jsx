@@ -10,6 +10,10 @@ const Grid = () => {
     { type: 'text', content: 'This is a text-only post!' },
   ]);
 
+  const handleDeletePost = id => {
+    setPosts(posts.filter(post => post.id !== id));
+  };
+
   const [isPostModalOpen, setIsPostModalOpen] = useState(false); // For media upload modal
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -40,7 +44,7 @@ const Grid = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2'>
         {posts.map((post, index) => (
           <div key={index} className='cursor-pointer' onClick={() => openModal(post)}>
-            <PostCard key={index} type={post.type} content={post.content} />
+            <PostCard key={index} type={post.type} content={post.content} onDelete={() => handleDeletePost(post.id)} />
           </div>
         ))}
       </div>

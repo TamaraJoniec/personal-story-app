@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ image, video, text, type, caption, children, isOpen, onClose }) => {
+const Modal = ({ text, image, video, caption, children, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -27,9 +27,10 @@ const Modal = ({ image, video, text, type, caption, children, isOpen, onClose })
             children
           ) : (
             <div className='w-full h-full flex flex-col justify-center items-center'>
+              {text && <p className='text-center text-lg'>{text}</p>}
               {image && <img src={image} alt='Post' className='object-contain w-full h-full' />}
               {video && (
-                <video controls className='object-contain w-full h-full'>
+                <video controls={isOpen} className='object-contain w-full h-full'>
                   <source src={video} type='video/mp4' />
                   Your browser does not support the video tag.
                 </video>
